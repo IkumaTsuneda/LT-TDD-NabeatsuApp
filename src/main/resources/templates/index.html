@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>ナベ〇ツ APP</title>
+        <link th:href="@{/css/serch-form.css}" rel="stylesheet"></link>
+        <link th:href="@{/webjars/bootstrap/4.5.3/css/bootstrap.min.css}" rel="stylesheet"/>
+    </head>
+    <body>
+        <form 
+            action="#" 
+            th:action="@{/judge}" 
+            th:method="post" 
+            th:object="${nabeatsuBean}"
+        >
+            <input 
+                type="text" 
+                class="form-control col-md-2"
+                placeholder="数字を入力してください" 
+                name="num"
+            >
+            <button 
+                type="submit"
+                class="btn btn-primary"
+            >
+                Go!
+            </button>
+            <div th:if="${errMsg} != null">
+                <p 
+                    class="row" 
+                    style="color: red;" 
+                    th:text="${errMsg}">
+                </p>
+            </div>
+        </form>
+        <div th:if="${!nabeatsuBean.initFlg} and ${errMsg} == null">
+            <span th:if="${nabeatsuBean.ahoFlg}">
+                <img  th:src="@{/images/aho.jpg}">
+                <p th:text="${nabeatsuBean.num} + ！！"></p>
+            </span>
+            <span th:if="${!nabeatsuBean.ahoFlg}">
+                <img th:src="@{/images/normal.jpg}">
+                <p th:text="${nabeatsuBean.num} + ..."></p>
+            </span>
+        </div>
+    </body>
+</html>
